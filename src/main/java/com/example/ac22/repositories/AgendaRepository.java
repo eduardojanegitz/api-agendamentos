@@ -11,10 +11,9 @@ import java.util.List;
 
 @Repository
 public interface AgendaRepository extends JpaRepository<Agenda, Long> {
-    @Query("SELECT A FROM AGENDA A WHERE A.professor.id = :id")
-    List<Agenda> agendasDoProfessor(@Param("id") Long id);
-
-    @Query("SELECT A FROM AGENDA A WHERE A.dataInicial <= :data AND A.dataFinal >= :data AND A.professor.id = :id")
-    List<Agenda> agendasProfessorPorData(@Param("id") Long id,
-            @Param("data") LocalDate data);
+    @Query("select a from Agenda a where a.dataInicial <= :data and a.dataFinal >= :data and a.professor.id = :id")
+    List<Agenda> agendasProfessorPorData(@Param("id")Long id,
+                                         @Param("data")LocalDate data);
+    @Query("select a from Agenda a where a.professor.id = :id")
+    List<Agenda> agendasDoProfessor(@Param("id")Long id);
 }
